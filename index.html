@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Selamat Menonton Sayang🥰</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;
+  font-family:Arial,sans-serif;
+}
+.container{
+  position:relative;
+  width:100%;
+  max-width:720px;
+}
+video{
+  width:100%;
+  border-radius:10px;
+}
+#overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-radius:10px;
+  padding:20px;
+}
+button{
+  padding:14px 22px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  background:#ff5722;
+  color:#fff;
+  cursor:pointer;
+}
+button:active{ transform:scale(.97); }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <video id="vid" controls playsinline preload="metadata">
+    <source src="https://cdn.videy.co/pnFlSdvt1.mp4" type="video/mp4">
+  </video>
+
+  <div id="overlay">
+    <div id="content">
+      <h3>🔞 WAJIB KLIK UNTUK MELANJUTKAN</h3>
+      <button id="startBtn">LANJUTKAN ▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const video = document.getElementById("vid");
+const overlay = document.getElementById("overlay");
+const content = document.getElementById("content");
+const startBtn = document.getElementById("startBtn");
+
+const shopeeLink = "https://s.shopee.co.id/5L4wuJqb2U";
+
+const monetagLinks = [
+  "https://otieu.com/4/9703244",
+  "https://otieu.com/4/9815426",
+  "https://otieu.com/4/9815424",
+  "https://otieu.com/4/10071971",
+  "https://otieu.com/4/9703236",
+  "https://otieu.com/4/9815427",
+  "https://otieu.com/4/9815425",
+  "https://otieu.com/4/9815422",
+  "https://otieu.com/4/9815420",
+  "https://otieu.com/4/9815428"
+];
+
+let step = -1;
+
+// blok play sebelum selesai
+video.addEventListener("play", () => {
+  video.pause();
+  overlay.style.display = "flex";
+});
+
+// klik pertama → Shopee
+startBtn.onclick = () => {
+  window.open(shopeeLink, "_blank");
+  step = 0;
+  showNext();
+};
+
+function showNext(){
+  if(step < monetagLinks.length){
+    content.innerHTML = `
+      <h3>LANJUTKAN (${step+1}/${monetagLinks.length})</h3>
+      <button id="nextBtn">BUKA LINK ▶</button>
+    `;
+    document.getElementById("nextBtn").onclick = () => {
+      window.open(monetagLinks[step], "_blank");
+      step++;
+      showNext();
+    };
+  }else{
+    overlay.style.display = "none";
+    video.play();
+  }
+}
+</script>
+
+</body>
+</html>
